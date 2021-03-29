@@ -16,8 +16,9 @@
         <br/>
 
 
-        <form method="post" th:action="@{/public/cliente/save}" th:object="${cliente}">
+        <form method="post" th:action="${!editMode} ? @{/public/cliente/save} : @{/cliente/save}" th:object="${cliente}">
             <fieldset>
+                <input type="hidden" th:field="*{id}"/>
                 <label for="nome">Nome: </label><br/>
                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." th:field="*{nome}"/>
                 <br/><br/>
@@ -46,7 +47,7 @@
                 <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." th:field="*{senha}"/>
                 <br/><br/>
 
-                <input type="submit" value="Cadastrar" />
+                <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
             </fieldset>
         </form>
 
