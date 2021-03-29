@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>BlueFood</title>
+        <link rel="stylesheet" type="text/css" href="css/bf_estiloSistema.css"/>
+    </head>
+    <body>
+        <header>
+            <div id="divLogotipoSistema">
+                <span id="spanAuxiliarDeAlinhamentoVertical"></span>
+                <a href="/">
+                    <img src="images/bf_logotipoSistema.png" id="imgLogotipoSistema"/>
+                </a>
+            </div>
+            <div id="divUsuarioLogado">
+                Olá Nome do usuário!
+                <br/>
+                <img id="imgIconeCarrinho" src="images/bf_iconeCarrinho.png"/>
+            </div>
+        </header>
+        <br><br>
+        <!--Cabeçalho - Fim -->
+        <div>
+                <img src="images/sys_restauranteSbubby.png" id="imgRestauranteBusca"/><br/>
+                <span id="restauranteOpcaoTitulo">Nome do Restaurante</span><br/>
+                <span id="restauranteOpcaoCategoria">Categoria de Comida</span><br/>
+                <span id="restauranteOpcaoTempo">Tempo médio de entrega: 40min</span><br/>
+                <span id="restauranteOpcaoTaxa">Taxa de entrega: R$15,00</span><br/>            
+        </div>
+
+        <div>
+            <h1>Opções</h1>
+            <fieldset id="fieldsetFiltros">
+                <legend>Filtros</legend>
+                <input type="button" value="Promoções" id="inputSelecionado"/>
+                <input type="button" value="Saladas"/>
+                <input type="button" value="Bebidas"/>
+                <input type="button" value="Pizzas"/>          
+            </fieldset>
+            <br/>
+        </div>
+
+        <div>
+            <h1>Destaques</h1>
+        </div>
+
+        <div id="divCategoriasComidaGeral">
+
+                <div id="divRestauranteOpcao">
+                    <img src="images/sys_comidaPizzaCalabresa.png" id="imgRestauranteOpcao"/>
+                    <br/>
+                    <span id="restauranteOpcaoTitulo">Pizza de Calabresa</span>
+                    <br/>
+                    <span>Massa fina, queijo, calabresa, pimenta.</span>
+                    <br/>
+                    <span>R$ 45,00</span>
+                    <br/>
+                    <form method="post" action="">
+                        <labeL for="quantidade">Quantidade: </labeL>
+                        <br/>
+                        <select name="quantidade" id="quantidade">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                        <br/><br/>
+                        Observações:
+                        <br/>
+                        <textarea>
+
+                        </textarea>
+                        <br/><br/>
+                        <input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';"/>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <h1>Menu</h1>
+            </div>
+
+            <div id="divCategoriasComidaGeral">
+                <div id="divRestauranteOpcao">
+                    <img src="images/sys_comidaHamburguer.png" id="imgRestauranteOpcao"/>
+                    <br/>
+                    <span id="restauranteOpcaoTitulo">Hamburguer</span>
+                    <br/>
+                    <span>Pão, hamburguer 200g, queijo, tomate, alface, bacon.</span>
+                    <br/>
+                    <span>R$ 30,00</span>
+                    <br/>
+                    <form method="post" action="">
+                        <labeL for="quantidade">Quantidade: </labeL>
+                        <br/>
+                        <select name="quantidade" id="quantidade">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                        <br/><br/>
+                        Observações:
+                        <br/>
+                        <textarea>
+
+                        </textarea>
+                        <br/><br/>
+                        <input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';"/>
+                    </form>
+                </div>
+             </div>
+
+
+             <div id="divCategoriasComidaGeral">
+                <div id="divRestauranteOpcao">
+                    <img src="images/sys_comidaHamburguer.png" id="imgRestauranteOpcao"/>
+                    <br/>
+                    <span id="restauranteOpcaoTitulo">Hamburguer</span>
+                    <br/>
+                    <span>Pão, hamburguer 200g, queijo, tomate, alface, bacon.</span>
+                    <br/>
+                    <span>R$ 30,00</span>
+                    <br/>
+                    <form method="post" action="">
+                        <labeL for="quantidade">Quantidade: </labeL>
+                        <br/>
+                        <select name="quantidade" id="quantidade">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                        <br/><br/>
+                        Observações:
+                        <br/>
+                        <textarea>
+
+                        </textarea>
+                        <br/><br/>
+                        <input type="button" value="Adicionar ao carrinho" onClick="location.href='clienteCarrinho.html';"/>
+                    </form>
+                </div>
+             </div>
+
+        <input type="button" value="Voltar" onClick="location.href='clienteBusca.html';"/>
+        <!--Rodapé - Início-->
+    </body>
+
+</html>
