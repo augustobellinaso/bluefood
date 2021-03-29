@@ -16,7 +16,7 @@
         <br/>
 
 
-        <form method="post" action="" th:object="${cliente}">
+        <form method="post" th:action="@{/public/cliente/save}" th:object="${cliente}">
             <fieldset>
                 <label for="nome">Nome: </label><br/>
                 <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." th:field="*{nome}"/>
