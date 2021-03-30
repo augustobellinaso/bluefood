@@ -22,9 +22,10 @@ public class RestauranteService {
             restaurante.setSenha(restauranteDB.getSenha());
         } else {
             restaurante.encryptPassword();
+            restaurante = restauranteRepository.save(restaurante);
+            restaurante.setLogotipoFileName();
+            //TODO: Upload!
         }
-
-        restauranteRepository.save(restaurante);
     }
 
 
