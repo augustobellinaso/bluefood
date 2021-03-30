@@ -76,14 +76,18 @@
                 </div>
 
                 <!--CAMPO SENHA-->
-                <label for="senha">Senha: </label><br/>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." th:field="*{senha}"
-                       th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/>
-                <br/><br/>
-
-                <div id="mensagemDeErro" th:if="${#fields.hasErrors('senha')}">
-                    <span th:errors="*{senha}"></span>
+                <div th:if="${!editMode}">
+                    <label for="senha">Senha: </label><br/>
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." th:field="*{senha}"
+                           th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('senha')}">
+                        <span th:errors="*{senha}"></span>
+                    </div>
+                    <br/><br/>
                 </div>
+                <input type="hidden" name="senha" value="*" th:if="${editMode}"/>
+
+
 
                 <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
             </fieldset>
