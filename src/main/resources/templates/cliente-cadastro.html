@@ -18,34 +18,69 @@
 
         <form method="post" th:action="${!editMode} ? @{/public/cliente/save} : @{/cliente/save}" th:object="${cliente}">
             <fieldset>
+
                 <input type="hidden" th:field="*{id}"/>
+
+                <!--CAMPO NOME-->
                 <label for="nome">Nome: </label><br/>
-                <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." th:field="*{nome}"/>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." th:field="*{nome}"
+                th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''"/>
                 <br/><br/>
 
-                <div id="mensagemDeErro">
-                    Aqui vai um exemplo de mensagem de erro
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('nome')}">
+                    <span th:errors="*{nome}"></span>
                 </div>
 
+                <!--CAMPO CPF-->
                 <label for="cpf">CPF: </label><br/>
-                <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF..." th:field="*{cpf}"/>
+                <input type="text" id="cpf" name="cpf" placeholder="Digite seu CPF..." th:field="*{cpf}"
+                       th:classappend="${#fields.hasErrors('cpf')} ? 'inputError' : ''"/>
                 <br/><br/>
 
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('cpf')}">
+                    <span th:errors="*{cpf}"></span>
+                </div>
+
+                <!--CAMPO E-MAIL-->
                 <label for="email">E-mail: </label><br/>
-                <input type="text" id="email" name="email" placeholder="Digite seu e-mail..." th:field="*{email}"/>
+                <input type="text" id="email" name="email" placeholder="Digite seu e-mail..." th:field="*{email}"
+                       th:classappend="${#fields.hasErrors('email')} ? 'inputError' : ''"/>
                 <br/><br/>
 
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('email')}">
+                    <span th:errors="*{email}"></span>
+                </div>
+
+
+                <!--CAMPO TELEFONE-->
                 <label for="telefone">Telefone: </label><br/>
-                <input type="text" id="telefone" name="telefone" placeholder="Digite seu telefone..." th:field="*{telefone}"/>
+                <input type="text" id="telefone" name="telefone" placeholder="Digite seu telefone..." th:field="*{telefone}"
+                       th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"/>
                 <br/><br/>
 
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('telefone')}">
+                    <span th:errors="*{telefone}"></span>
+                </div>
+
+                <!--CAMPO CEP-->
                 <label for="cep">CEP: </label><br/>
-                <input type="text" id="cep" name="cep" placeholder="Digite seu CEP..." th:field="*{cep}"/>
+                <input type="text" id="cep" name="cep" placeholder="Digite seu CEP..." th:field="*{cep}"
+                       th:classappend="${#fields.hasErrors('cep')} ? 'inputError' : ''"/>
                 <br/><br/>
 
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('cep')}">
+                    <span th:errors="*{cep}"></span>
+                </div>
+
+                <!--CAMPO SENHA-->
                 <label for="senha">Senha: </label><br/>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." th:field="*{senha}"/>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha..." th:field="*{senha}"
+                       th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/>
                 <br/><br/>
+
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('senha')}">
+                    <span th:errors="*{senha}"></span>
+                </div>
 
                 <input type="submit" th:value="${!editMode} ? 'Cadastrar' : 'Alterar'" />
             </fieldset>
