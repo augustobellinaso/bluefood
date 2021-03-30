@@ -1,6 +1,7 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
 import augustobellinaso.bluefood.application.ClienteService;
+import augustobellinaso.bluefood.application.RestauranteService;
 import augustobellinaso.bluefood.application.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestaurante;
@@ -25,6 +26,9 @@ public class PublicController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private RestauranteService restauranteService;
 
     @Autowired
     private CategoriaRestauranteRepository categoriaRestauranteRepository;
@@ -60,5 +64,23 @@ public class PublicController {
 
         ControllerHelper.setEditMode(model, false);
         return "cliente-cadastro";
+    }
+
+    @PostMapping(path = "/restaurante/save")
+    public String saveRestaurante(@ModelAttribute("restaurante") @Valid Restaurante restaurante,
+                              Errors errors, Model model){
+
+        if (!errors.hasErrors()){
+
+            try {
+                restauranteService.saveRestaurante(restaurante);
+                model.addAttribute("msg", "Restaurante cadastrado com sucesso!");
+            } catch (ValidationException e) {
+                errors.rejectValue("email", null, e.getMessage());
+            }
+        }
+
+        ControllerHelper.setEditMode(model, false);
+        return "restaurante-cadastro";
     }
 }
