@@ -1,6 +1,5 @@
 package augustobellinaso.bluefood.application;
 
-import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import augustobellinaso.bluefood.domain.restaurante.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,9 @@ public class RestauranteService {
 
     @Autowired
     private RestauranteRepository restauranteRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     public void saveRestaurante(Restaurante restaurante) throws ValidationException {
         if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
@@ -24,7 +26,8 @@ public class RestauranteService {
             restaurante.encryptPassword();
             restaurante = restauranteRepository.save(restaurante);
             restaurante.setLogotipoFileName();
-            //TODO: Upload!
+            imageService.uploadLogotipo(restaurante.getLogotipoFile(), restaurante.getLogotipo());
+
         }
     }
 
