@@ -1,7 +1,7 @@
 package augustobellinaso.bluefood.util;
 
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class StringUtils {
 
@@ -18,7 +18,8 @@ public class StringUtils {
             return null;
         }
 
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return encoder.encode(rawString);
+        //PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        //return encoder.encode(rawString);
+        return rawString;
     }
 }
