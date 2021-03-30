@@ -51,4 +51,12 @@ public class Restaurante extends Usuario {
     @ToString.Exclude
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
+    public void setLogotipoFileName(){
+        if (getId() == null) {
+            throw new IllegalStateException("É preciso primeiro gravar o registro");
+        }
+
+        //TODO: Trocar forma de ler a extensão
+        this.logotipo = String.format("%04d-logo.%s", getId(), ".png");
+    }
 }
