@@ -4,6 +4,7 @@ import augustobellinaso.bluefood.domain.usuario.Usuario;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -43,6 +44,7 @@ public class Restaurante extends Usuario {
             inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
     )
     @Size(min = 1, message = "O restaurante precisa ter pelo menos uma categoria")
+    @ToString.Exclude
     private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
 }
