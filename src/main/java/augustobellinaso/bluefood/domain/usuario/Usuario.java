@@ -24,11 +24,13 @@ public class Usuario implements Serializable {
 
     @NotBlank(message = "O nome não pode estar vazio")
     @Size(max = 80, message = "O nome é muito grande")
+    @Column(nullable = false)
     private String nome;
 
     @NotBlank(message = "O e-mail não pode estar vazio")
     @Size(max = 60, message = "O e-mail é muito grande")
     @Email
+    @Column(nullable = false)
     private String email;
 
     @NotBlank(message = "O telefone não pode estar vazio")
@@ -38,5 +40,6 @@ public class Usuario implements Serializable {
 
     @NotBlank(message = "A senha não pode estar vazia")
     @Size(max = 80, message = "A senha é muito grande")
+    @Column(nullable = false)
     private String senha;
 }
