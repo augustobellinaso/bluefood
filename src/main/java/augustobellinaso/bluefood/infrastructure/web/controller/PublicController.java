@@ -1,6 +1,7 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
 import augustobellinaso.bluefood.application.ClienteService;
+import augustobellinaso.bluefood.application.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,13 @@ public class PublicController {
                             Errors errors, Model model){
 
         if (!errors.hasErrors()){
-            clienteService.saveCliente(cliente);
-            model.addAttribute("msg", "Cliente cadastrado com sucesso!");
+
+            try {
+                clienteService.saveCliente(cliente);
+                model.addAttribute("msg", "Cliente cadastrado com sucesso!");
+            } catch (ValidationException e) {
+                errors.rejectValue("email", null, e.getMessage());
+            }
         }
 
         ControllerHelper.setEditMode(model, false);
