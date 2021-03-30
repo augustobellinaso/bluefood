@@ -28,8 +28,11 @@
             <input type="submit" value="Criar conta de cliente"/>
         </form>
         <br/>
-        <input type="button" value="Criar conta de restaurante" onClick="location.href='restauranteCadastro.html';"/>
+        <form method="get" th:action="@{/public/restaurante/new}">
+            <input type="submit" value="Criar conta de restaurante"/>
+        </form>
         <br/>
+
     </div>
 
 </div>

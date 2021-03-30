@@ -3,6 +3,7 @@ package augustobellinaso.bluefood.infrastructure.web.controller;
 import augustobellinaso.bluefood.application.ClienteService;
 import augustobellinaso.bluefood.application.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
+import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,13 @@ public class PublicController {
         model.addAttribute("cliente", new Cliente());
         ControllerHelper.setEditMode(model, false);
         return "cliente-cadastro";
+    }
+
+    @GetMapping(path = "/restaurante/new")
+    public String newRestaurante(Model model){
+        model.addAttribute("restaurante", new Restaurante());
+        ControllerHelper.setEditMode(model, false);
+        return "restaurante-cadastro";
     }
 
     @PostMapping(path = "/cliente/save")
