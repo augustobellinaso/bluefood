@@ -5,11 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -36,5 +36,12 @@ public class Restaurante extends Usuario {
     @Max(120)
     private Integer tempoEntregaBase;
 
+    @ManyToMany
+    @JoinTable(
+            name = "restaurante_has_categoria",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "categoria_restaurante_id")
+    )
+    private Set<CategoriaRestaurante> categorias = new HashSet<>(0);
 
 }
