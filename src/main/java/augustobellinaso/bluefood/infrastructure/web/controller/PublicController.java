@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.naming.ldap.Control;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -39,9 +40,7 @@ public class PublicController {
     public String newRestaurante(Model model){
         model.addAttribute("restaurante", new Restaurante());
         ControllerHelper.setEditMode(model, false);
-
-
-
+        ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
         return "restaurante-cadastro";
     }
 
