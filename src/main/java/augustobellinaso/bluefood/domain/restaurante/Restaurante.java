@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -26,6 +27,9 @@ public class Restaurante extends Usuario {
 
     @Size(max = 80)
     private String logotipo;
+
+
+    private transient MultipartFile logotipoFile;
 
     @NotNull(message = "A taxa de entrega não pode ser vazia")
     @Min(0)
