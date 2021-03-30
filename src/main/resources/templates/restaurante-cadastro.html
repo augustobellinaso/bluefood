@@ -8,22 +8,76 @@
     <div layout:fragment="content">
         <div>
             <h1>Cadastro de Restaurante</h1>
-            <form method="post" action="">
+
+            <div id="mensagemDeSucesso" th:if="${msg != null}">
+                <span th:text="${msg}"></span>
+            </div>
+            <br/>
+
+            <form method="post" th:object="${restaurante}" th:action="${!editMode} ? @{/restaurante/save} : @{/public/restaurante/save}"
+                  enctype="multipart/form-data">
                 <fieldset>
+
+                    <input type="hidden" th:field="*{id}"/>
+
+                    <!--NOME-->
                     <label for="nome">Nome do Restaurante: </label> <br/>
-                    <input type="text" id="nome" placeholder="Digite aqui o nome..."/><br/><br/>
+                    <input type="text" id="nome" placeholder="Digite aqui o nome..." th:field="*{nome}"
+                           th:classappend="${#fields.hasErrors('nome')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('nome')}">
+                        <span th:errors="*{nome}"></span>
+                    </div>
+                    <br/><br/>
 
+                    <!--CNPJ-->
                     <label for="cnpj">CNPJ: </label> <br/>
-                    <input type="text" id="cnpj" placeholder="Digite aqui o CNPJ..."/><br/><br/>
+                    <input type="text" id="cnpj" placeholder="Digite aqui o CNPJ..." th:field="*{cnpj}"
+                           th:classappend="${#fields.hasErrors('cnpj')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('cnpj')}">
+                        <span th:errors="*{cnpj}"></span>
+                    </div>
+                    <br/><br/>
 
+                    <!--EMAIL-->
                     <label for="email">E-mail: </label> <br/>
-                    <input type="text" id="email" placeholder="Digite aqui o e-mail..."/><br/><br/>
+                    <input type="text" id="email" placeholder="Digite aqui o e-mail..." th:field="*{email}"
+                           th:classappend="${#fields.hasErrors('email')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('email')}">
+                        <span th:errors="*{email}"></span>
+                    </div>
+                    <br/><br/>
 
+                    <!--TELEFONE-->
                     <label for="telefone">Telefone: </label> <br/>
-                    <input type="text" id="telefone" placeholder="Digite aqui o telefone..."/><br/><br/>
+                    <input type="text" id="telefone" placeholder="Digite aqui o telefone..." th:field="*{telefone}"
+                           th:classappend="${#fields.hasErrors('telefone')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('telefone')}">
+                        <span th:errors="*{telefone}"></span>
+                    </div>
+                    <br/><br/>
 
-                    <label for="cep">CEP: </label> <br/>
-                    <input type="text" id="cep" placeholder="Digite aqui o CEP..."/><br/><br/>
+                    <!--TAXA DE ENTREGA-->
+                    <label for="taxaEntrega">Taxa de Entrega:</label>
+                    <input type="text" id="taxaEntrega" placeholder="Taxa de entrega"  th:field="*{taxaEntrega}"
+                           th:classappend="${#fields.hasErrors('taxaEntrega')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('taxaEntrega')}">
+                        <span th:errors="*{taxaEntrega}"></span>
+                    </div>
+                    <br/><br/>
+
+                    <!--TEMPO DE ENTREGA-->
+                    <label for="tempoEntrega">Tempo de Entrega (mín):</label>
+                    <input type="text" id="tempoEntrega" placeholder="Tempo de entrega (minutos)"  th:field="*{tempoEntregaBase}"
+                           th:classappend="${#fields.hasErrors('tempoEntregaBase')} ? 'inputError' : ''"/>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('tempoEntregaBase')}">
+                        <span th:errors="*{tempoEntregaBase}"></span>
+                    </div>
+                    <br/><br/>
+
+                    <!--LOGOTIPO-->
+                    <label for="logotipo">Logotipo: </label><br/>
+                    <input type="file" name="logotipo" id="logotipo" placeholder="Selecionar arquivo..."/>
+                    <br/><br/>
 
                     <label for="categoria">Categoria de Comida: </label><br/>
                     <select name="categoria" id="categoria">
@@ -33,18 +87,21 @@
                         <option>Hamburguer</option>
                     </select><br/><br/>
 
-                    <label for="logotipo">Logotipo: </label><br/>
-                    <input type="file" name="logotipo" id="logotipo" placeholder="Selecionar arquivo..."/><br/><br/>
-
-                    <label for="senha">Senha: </label><br/>
-                    <input type="password" id="senha" name="senha" placeholder="Digite a senha..."/><br/><br/>
 
 
-                    <div class="inputError">
-                        Aqui vai um exemplo de mensagem de erro
-                    </div><br/>
+                    <div th:if="${!editMode}">
+                        <label for="senha">Senha: </label><br/>
+                        <input type="password" id="senha" name="senha" placeholder="Digite a senha..." th:field="*{senha}"
+                               th:classappend="${#fields.hasErrors('senha')} ? 'inputError' : ''"/>
+                        <div id="mensagemDeErro" th:if="${#fields.hasErrors('senha')}">
+                            <span th:errors="*{senha}"></span>
+                        </div>
+                        <br/><br/>
+                    </div>
+                    <input type="hidden" name="senha" value="*" th:if="${editMode}"/>
 
-                    <input type="button" value="Cadastrar" onClick="location.href='restauranteHome.html';"/>
+
+                    <input type="submit" value="Cadastrar"/>
                 </fieldset>
             </form>
         </div>
