@@ -80,12 +80,13 @@
                     <br/><br/>
 
                     <label for="categoria">Categoria de Comida: </label><br/>
-                    <select name="categoria" id="categoria">
-                        <option>Salada</option>
-                        <option>Churrasco</option>
-                        <option>Pizza</option>
-                        <option>Hamburguer</option>
-                    </select><br/><br/>
+                    <select name="categoria" id="categoria" multiple="multiple" th:field="*{categorias}" style="height: 90px;"
+                            th:classappend="${#fields.hasErrors('categorias')} ? 'inputError' : ''">
+                        <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.nome}"></option>
+                    </select>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('categorias')}">
+                        <span th:errors="*{categorias}"></span>
+                    </div><br/><br/>
 
 
 
