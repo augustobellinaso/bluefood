@@ -13,7 +13,7 @@ public class StringUtils {
         return str.trim().length() == 0;
     }
 
-    public String encrypt(String rawString) {
+    public static String encrypt(String rawString) {
         if (isEmpty(rawString)) {
             return null;
         }

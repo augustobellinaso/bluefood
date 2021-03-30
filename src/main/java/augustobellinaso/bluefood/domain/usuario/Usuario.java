@@ -1,5 +1,6 @@
 package augustobellinaso.bluefood.domain.usuario;
 
+import augustobellinaso.bluefood.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,4 +43,8 @@ public class Usuario implements Serializable {
     @Size(max = 80, message = "A senha é muito grande")
     @Column(nullable = false)
     private String senha;
+
+    public void encryptPassword(){
+        this.senha = StringUtils.encrypt(this.senha);
+    }
 }
