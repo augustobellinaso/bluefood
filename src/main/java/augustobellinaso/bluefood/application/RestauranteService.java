@@ -1,9 +1,13 @@
 package augustobellinaso.bluefood.application;
 
+import augustobellinaso.bluefood.domain.cliente.Cliente;
+import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import augustobellinaso.bluefood.domain.restaurante.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class RestauranteService {
@@ -12,8 +16,12 @@ public class RestauranteService {
     private RestauranteRepository restauranteRepository;
 
     @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
     private ImageService imageService;
 
+    @Transactional
     public void saveRestaurante(Restaurante restaurante) throws ValidationException {
         if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
             throw new ValidationException("O e-mail já está cadastrado");
@@ -33,6 +41,12 @@ public class RestauranteService {
 
 
     private boolean validateEmail(String email, Integer id) {
+        Cliente cliente = clienteRepository.findByEmail(email);
+
+        if (cliente != null) {
+            return false;
+        }
+
         Restaurante restaurante = restauranteRepository.findByEmail(email);
 
         if (restaurante != null) {
