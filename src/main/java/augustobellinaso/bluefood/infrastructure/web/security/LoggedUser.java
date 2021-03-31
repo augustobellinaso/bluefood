@@ -73,4 +73,8 @@ public class LoggedUser implements UserDetails {
     public Role getRole() {
         return role;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }
