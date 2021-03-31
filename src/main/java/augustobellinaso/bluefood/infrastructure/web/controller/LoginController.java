@@ -12,7 +12,7 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping(path = "/login-error")
+    @GetMapping(path = {"/login-erro", "/login-error"})
     public String loginError(Model model) {
         model.addAttribute("msg", "Credenciais inválidas");
         return "login";
