@@ -1,4 +1,4 @@
-package augustobellinaso.bluefood.application;
+package augustobellinaso.bluefood.application.service;
 
 public class ApplicationServiceException extends RuntimeException {
 

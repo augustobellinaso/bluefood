@@ -1,10 +1,9 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
-import augustobellinaso.bluefood.application.ClienteService;
-import augustobellinaso.bluefood.application.RestauranteService;
-import augustobellinaso.bluefood.application.ValidationException;
+import augustobellinaso.bluefood.application.service.ClienteService;
+import augustobellinaso.bluefood.application.service.RestauranteService;
+import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
-import augustobellinaso.bluefood.domain.restaurante.CategoriaRestaurante;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.naming.ldap.Control;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping(path = "/public")
