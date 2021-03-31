@@ -79,7 +79,10 @@
                 <!--LOGOTIPO-->
                 <label for="logotipo">Logotipo: </label><br/>
                 <input type="file" name="logotipo" id="logotipo" placeholder="Selecionar arquivo..."
-                       th:field="*{logotipoFile}"/>
+                       th:field="*{logotipoFile}" th:classappend="${#fields.hasErrors('logotipoFile')} ? 'inputError' : ''"/>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('logotipoFile')}">
+                    <span th:errors="*{logotipoFile}"></span>
+                </div>
                 <br/><br/>
 
                 <label for="categoria">Categoria de Comida: </label><br/>
