@@ -54,7 +54,7 @@ public class ItemCardapio implements Serializable {
     private Restaurante restaurante;
 
     @UploadConstraint(acceptedTypes = FileType.PNG, message = "O arquivo não é um arquivo de imagem válido")
-    private MultipartFile imagemFile;
+    private transient MultipartFile imagemFile;
 
     public void setImagemFileName(){
         if (getId() == null) {
