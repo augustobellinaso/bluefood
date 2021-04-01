@@ -87,7 +87,7 @@ fieldset
     width: 400px;
     margin-left: auto;
     margin-right: auto;
-    border-width: 2px;
+    border: none;
 }
 
 input, textarea, select
