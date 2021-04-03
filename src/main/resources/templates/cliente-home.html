@@ -20,38 +20,10 @@
 
     <!--Categorias de comida-->
     <div id="divCategoriasComidaGeral">
-        <div id="divCategoriasComidaOpcao">
+        <div id="divCategoriasComidaOpcao" th:each="categoria : ${categorias}">
             <a href="#">
-                <img src="images/sys_categoriaChurrasco.png" id="imgCategoriaCaomida"/><br/>
-                <span>Churrasco</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/sys_categoriaHamburguer.png" id="imgCategoriaCaomida"/><br/>
-                <span>Hamburguer</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/sys_categoriaPizza.png" id="imgCategoriaCaomida"/><br/>
-                <span>Pizza</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/sys_categoriaSalada.png" id="imgCategoriaCaomida"/><br/>
-                <span>Salada</span>
-            </a>
-        </div>
-
-        <div id="divCategoriasComidaOpcao">
-            <a href="#">
-                <img src="images/sys_categoriaSobremesa.png" id="imgCategoriaCaomida"/><br/>
-                <span>Sobremesa</span>
+                <img th:src="@{/images/categoria/} + ${categoria.imagem}" id="imgCategoriaCaomida"/><br/>
+                <span th:text="${categoria.nome}"></span>
             </a>
         </div>
     </div>
