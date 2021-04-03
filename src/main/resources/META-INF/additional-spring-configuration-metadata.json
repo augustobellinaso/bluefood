@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "bluefood.files.comida",
-      "type": "java.lang.String",
-      "description": "Description for bluefood.files.comida."
-  }
-] }
