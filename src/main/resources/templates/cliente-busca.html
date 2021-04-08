@@ -37,11 +37,25 @@
             <h1>Resultados</h1>
             <fieldset>
                 <legend>Filtros</legend>
-                <input type="button" value="Entrega grátis" th:id="*{entregaGratis} ? 'inputSelecionado' : ''"/><br/>
-                <input type="button" value="Maior taxa de entrega" th:id="*{order.name() == 'Taxa' and !*{asc}} ? 'inputSelecionado' : ''"/>
-                <input type="button" value="Menor taxa de entrega" th:id="*{order.name() == 'Taxa' and *{asc}} ? 'inputSelecionado' : ''"/><br/>
-                <input type="button" value="Maior tempo" th:id="*{order.name() == 'Tempo' and !*{asc}} ? 'inputSelecionado' : ''"/>
-                <input type="button" value="Menor tempo" th:id="*{order.name() == 'Tempo' and *{asc}} ? 'inputSelecionado' : ''"/><br/>
+                <input type="button" value="Entrega grátis"
+                       th:id="*{entregaGratis} ? 'inputSelecionado' : ''"
+                       onclick="setCmd('EntregaGratis')"/><br/>
+
+                <input type="button" value="Maior taxa de entrega"
+                       th:id="*{order.name() == 'Taxa' and !*{asc}} ? 'inputSelecionado' : ''"
+                       onclick="setCmd('MaiorTaxa')"/>
+
+                <input type="button" value="Menor taxa de entrega"
+                       th:id="*{order.name() == 'Taxa' and *{asc}} ? 'inputSelecionado' : ''"
+                       onclick="setCmd('MenorTaxa')"/><br/>
+
+                <input type="button" value="Maior tempo"
+                       th:id="*{order.name() == 'Tempo' and !*{asc}} ? 'inputSelecionado' : ''"
+                       onclick="setCmd('MaiorTempo')"/>
+
+                <input type="button" value="Menor tempo"
+                       th:id="*{order.name() == 'Tempo' and *{asc}} ? 'inputSelecionado' : ''"
+                       onclick="setCmd('MenorTempo')"/><br/>
 
                 <input type="hidden" id="entregaGratis" th:field="*{entregaGratis}"/>
                 <input type="hidden" id="order" th:field="*{order}"/>
