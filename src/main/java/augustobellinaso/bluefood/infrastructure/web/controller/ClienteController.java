@@ -1,11 +1,13 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
 import augustobellinaso.bluefood.application.service.ClienteService;
+import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestaurante;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private RestauranteService restauranteService;
 
     @GetMapping(path = "/home")
     public String home(Model model){
@@ -72,6 +77,10 @@ public class ClienteController {
     @GetMapping(path = "/search")
     public String search(@ModelAttribute("searchFilter") SearchFilter filter,
                          Model model) {
+
+        List<Restaurante> restaurantes = restauranteService.search(filter);
+        model.addAttribute("restaurantes", restaurantes);
+
         ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
         return "cliente-busca";
     }

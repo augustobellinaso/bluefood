@@ -43,38 +43,18 @@
 
     <div id="divRestauranteGeral">
 
-        <div id="divRestauranteOpcao">
+        <div id="divRestauranteOpcao" th:each="restaurante : ${restaurantes}">
             <a href="clienteRestaurante.html">
-                <img src="images/sys_restauranteBubgerKirg.png" id="imgRestauranteOpcao"/><br/>
-                <span id="restauranteOpcaoTitulo">Nome do Restaurante</span><br/>
-                <span>Categoria de Comida</span><br/>
-                <span>Tempo médio de entrega: 40min</span><br/>
-                <span>Taxa de entrega: R$15,00</span><br/>
+                <img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"/><br/>
+                <span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br/>
+                <span>Categoria</span><br/>
+                <span th:text="'Tempo médio de entrega: ' + ${restaurante.tempoEntregaBase} + 'm'"></span><br/>
+                <span th:text="'Taxa de entrega: R$' + ${restaurante.taxaEntrega}"></span><br/>
             </a>
+            <br/> <br/>
         </div>
-        <br/><br/>
 
-        <div id="divRestauranteOpcao">
-            <a href="clienteRestaurante.html">
-                <img src="images/sys_restauranteMcNaldos.png" id="imgRestauranteOpcao"/><br/>
-                <span id="restauranteOpcaoTitulo">Nome do Restaurante</span><br/>
-                <span>Categoria de Comida</span><br/>
-                <span>Tempo médio de entrega: 40min</span><br/>
-                <span>Taxa de entrega: R$15,00</span><br/>
-            </a>
-        </div>
-        <br/><br/>
 
-        <div id="divRestauranteOpcao">
-            <a href="clienteRestaurante.html">
-                <img src="images/sys_restauranteSbubby.png" id="imgRestauranteOpcao"/><br/>
-                <span id="restauranteOpcaoTitulo">Nome do Restaurante</span><br/>
-                <span>Categoria de Comida</span><br/>
-                <span>Tempo médio de entrega: 40min</span><br/>
-                <span>Taxa de entrega: R$15,00</span><br/>
-            </a>
-        </div>
-        <br/><br/>
     </div>
 
     <input type="button" value="Voltar" onClick="location.href='clienteHome.html';"/>

@@ -4,9 +4,12 @@ import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import augustobellinaso.bluefood.domain.restaurante.RestauranteRepository;
+import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -62,6 +65,9 @@ public class RestauranteService {
         return true;
     }
 
-
+    public List<Restaurante> search(SearchFilter filter) {
+        //TODO Considerar critérios de filtragem.
+        return restauranteRepository.findAll();
+    }
 
 }
