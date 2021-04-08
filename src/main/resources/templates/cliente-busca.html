@@ -47,7 +47,7 @@
             <a href="clienteRestaurante.html">
                 <img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteOpcao"/><br/>
                 <span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br/>
-                <span>Categoria</span><br/>
+                <span th:text="${restaurante.categoriasAsText}"></span><br/>
                 <span th:text="'Tempo médio de entrega: ' + ${restaurante.tempoEntregaBase} + 'm'"></span><br/>
                 <span th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span><br/>
             </a>

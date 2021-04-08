@@ -3,6 +3,7 @@ package augustobellinaso.bluefood.domain.restaurante;
 import augustobellinaso.bluefood.domain.usuario.Usuario;
 import augustobellinaso.bluefood.infrastructure.web.validator.UploadConstraint;
 import augustobellinaso.bluefood.util.FileType;
+import augustobellinaso.bluefood.util.StringUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -62,5 +64,16 @@ public class Restaurante extends Usuario {
         }
 
         this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
+    }
+
+
+    public String getCategoriaAsText() {
+        Set<String> strings = new LinkedHashSet<>();
+
+        for (CategoriaRestaurante categoria : categorias) {
+            strings.add(categoria.getNome());
+        }
+
+        return StringUtils.concatenate(strings);
     }
 }
