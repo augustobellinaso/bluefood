@@ -12,4 +12,13 @@ public class SearchFilter {
     private String texto;
     private SearchType searchType;
     private Integer categoriaId;
+
+    public void processFilter() {
+
+        if (searchType == SearchType.Texto) {
+            categoriaId = null;
+        } else if(searchType == SearchType.Categoria) {
+            texto = null;
+        }
+    }
 }

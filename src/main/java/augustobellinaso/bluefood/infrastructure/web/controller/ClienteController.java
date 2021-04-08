@@ -78,10 +78,15 @@ public class ClienteController {
     public String search(@ModelAttribute("searchFilter") SearchFilter filter,
                          Model model) {
 
+        filter.processFilter();
+
         List<Restaurante> restaurantes = restauranteService.search(filter);
         model.addAttribute("restaurantes", restaurantes);
 
         ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
+
+        model.addAttribute("searcFilter", filter);
+
         return "cliente-busca";
     }
 
