@@ -1,5 +1,6 @@
 package augustobellinaso.bluefood.domain.restaurante;
 
+import augustobellinaso.bluefood.util.StringUtils;
 import lombok.Data;
 
 @Data
@@ -24,7 +25,31 @@ public class SearchFilter {
     private boolean asc;
     private boolean entregaGratis;
 
-    public void processFilter() {
+    public void processFilter(String cmdString) {
+
+        if (!StringUtils.isEmpty(cmdString)) {
+            Command cmd = Command.valueOf(cmdString);
+
+            if (cmd == Command.EntregaGratis) {
+                entregaGratis = !entregaGratis;
+
+            } else if (cmd == Command.MaiorTaxa) {
+                order = Order.Taxa;
+                asc = false;
+
+            } else if (cmd == Command.MenorTaxa) {
+                order = Order.Taxa;
+                asc = true;
+
+            } else if (cmd == Command.MaiorTempo) {
+                order = Order.Tempo;
+                asc = false;
+
+            } else if (cmd == Command.MenorTempo) {
+                order = Order.Tempo;
+                asc = true;
+            }
+        }
 
         if (searchType == SearchType.Texto) {
             categoriaId = null;
