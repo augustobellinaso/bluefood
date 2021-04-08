@@ -58,11 +58,14 @@
             </a>
             <br/> <br/>
         </div>
-
-
     </div>
 
-    <input type="button" value="Voltar" onClick="location.href='clienteHome.html';"/>
+    <div th:if="${restaurantes.size() == 0}">
+        <span>Nenhum restaurante encontrado!</span> <br/>
+    </div>
+    <br/> <br/>
+
+    <input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/cliente/home} + '\';'"/>
 
 </div>
 </body>
