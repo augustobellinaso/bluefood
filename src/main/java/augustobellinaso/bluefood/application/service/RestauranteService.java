@@ -3,12 +3,15 @@ package augustobellinaso.bluefood.application.service;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
+import augustobellinaso.bluefood.domain.restaurante.RestauranteComparator;
 import augustobellinaso.bluefood.domain.restaurante.RestauranteRepository;
 import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
+import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -77,6 +80,21 @@ public class RestauranteService {
         } else {
             throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado!");
         }
+
+        Iterator<Restaurante> it = restaurantes.iterator();
+
+        while (it.hasNext()) {
+            Restaurante restaurante = it.next();
+            double taxaEntrega = restaurante.getTaxaEntrega().doubleValue();
+
+            if (filter.isEntregaGratis() && taxaEntrega > 0
+                    || !filter.isEntregaGratis() && taxaEntrega == 0) {
+                it.remove();
+            }
+        }
+
+        RestauranteComparator comparator = new RestauranteComparator(filter, SecurityUtils.loggedCliente().getCep());
+        restaurantes.sort(comparator);
 
         return restaurantes;
     }
