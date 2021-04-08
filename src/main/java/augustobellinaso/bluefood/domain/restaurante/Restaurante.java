@@ -45,7 +45,7 @@ public class Restaurante extends Usuario {
     @Max(120)
     private Integer tempoEntregaBase;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "restaurante_has_categoria",
             joinColumns = @JoinColumn(name = "restaurante_id"),
