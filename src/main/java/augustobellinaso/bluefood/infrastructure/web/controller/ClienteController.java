@@ -6,6 +6,7 @@ import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestaurante;
 import augustobellinaso.bluefood.domain.restaurante.CategoriaRestauranteRepository;
+import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -37,6 +38,7 @@ public class ClienteController {
     public String home(Model model){
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
         model.addAttribute("categorias", categorias);
+        model.addAttribute("searchFilter", new SearchFilter());
         return "cliente-home";
     }
 
@@ -65,6 +67,13 @@ public class ClienteController {
 
         ControllerHelper.setEditMode(model, false);
         return "cliente-cadastro";
+    }
+
+    @GetMapping(path = "/search")
+    public String search(@ModelAttribute("searchFilter") SearchFilter filter,
+                         Model model) {
+        ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
+        return "cliente-busca";
     }
 
 }
