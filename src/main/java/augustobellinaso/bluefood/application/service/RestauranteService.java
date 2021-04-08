@@ -66,8 +66,19 @@ public class RestauranteService {
     }
 
     public List<Restaurante> search(SearchFilter filter) {
-        //TODO Considerar critérios de filtragem.
-        return restauranteRepository.findAll();
+        List<Restaurante> restaurantes;
+
+        if (filter.getSearchType() == SearchFilter.SearchType.Texto) {
+            restaurantes = restauranteRepository.findByNomeIgnoreCaseContaining(filter.getTexto());
+
+        } else if (filter.getSearchType() == SearchFilter.SearchType.Categoria){
+            restaurantes = restauranteRepository.findByCategorias_Id(filter.getCategoriaId());
+
+        } else {
+            throw new IllegalStateException("O tipo de busca " + filter.getSearchType() + " não é suportado!");
+        }
+
+        return restaurantes;
     }
 
 }
