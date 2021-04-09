@@ -11,19 +11,29 @@
         <img th:src="@{/images/logotipo/} + ${restaurante.logotipo}" id="imgRestauranteBusca"/><br/>
         <span id="restauranteOpcaoTitulo" th:text="${restaurante.nome}"></span><br/>
         <span id="restauranteOpcaoCategoria" th:text="${restaurante.categoriaAsText}"></span><br/>
-        <span id="restauranteOpcaoTempo" th:text="'Tempo médio de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span><br/>
-        <span id="restauranteOpcaoTaxa" th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span><br/>
+        <span id="restauranteOpcaoTempo"
+              th:text="'Tempo médio de entrega: ' + ${restaurante.calcularTempoEntrega(cep)} + 'm'"></span><br/>
+        <span id="restauranteOpcaoTaxa"
+              th:text="'Taxa de entrega: ' + ${#numbers.formatCurrency(restaurante.taxaEntrega)}"></span><br/>
     </div>
 
     <div>
         <h1>Opções</h1>
-        <fieldset id="fieldsetFiltros">
-            <legend>Filtros</legend>
-            <div style="display: inline;" th:each="categoria : ${categorias}">
-                <input type="button" th:value="${categoria}"/>
-            </div>
+        <form id="filterForm" method="get" th:action="@{/cliente/restaurante}">
+            <input type="hidden" id="categoria" name="categoria"/>
+            <input type="hidden" name="restauranteId" th:value="${restaurante.id}"/>
+            <fieldset id="fieldsetFiltros">
+                <legend>Filtros</legend>
+                <div style="display: inline;" th:each="categoria : ${categorias}">
+                    <input type="button"
+                           th:id="${categoria == categoriaSelecionada} ? 'inputSelecionado' : ''"
+                           th:value="${categoria}"
+                           th:data-categoria="${categoria}"
+                           onclick="filterCardapio(this.getAttribute('data-categoria'));"/>
+                </div>
 
-        </fieldset>
+            </fieldset>
+        </form>
         <br/>
     </div>
 
@@ -56,6 +66,8 @@
             </form>
         </div>
     </div>
+    <span th:if="${itensCardapioDestaque.size() == 0}">Não existem itens em destaque</span>
+    <br/><br/>
 
     <div>
         <h1>Menu</h1>
