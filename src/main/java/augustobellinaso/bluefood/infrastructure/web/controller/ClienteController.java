@@ -5,10 +5,7 @@ import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
-import augustobellinaso.bluefood.domain.restaurante.CategoriaRestaurante;
-import augustobellinaso.bluefood.domain.restaurante.CategoriaRestauranteRepository;
-import augustobellinaso.bluefood.domain.restaurante.Restaurante;
-import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
+import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -35,6 +32,9 @@ public class ClienteController {
 
     @Autowired
     private RestauranteService restauranteService;
+
+    @Autowired
+    private RestauranteRepository restauranteRepository;
 
     @GetMapping(path = "/home")
     public String home(Model model){
@@ -83,9 +83,20 @@ public class ClienteController {
 
         ControllerHelper.addCategoriasToRequest(categoriaRestauranteRepository, model);
 
-        model.addAttribute("searcFilter", filter);
+        model.addAttribute("searchFilter", filter);
+        model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
 
         return "cliente-busca";
+    }
+
+    @GetMapping(path = "/restaurante")
+    public String viewRestaurante(@RequestParam("restauranteId") Integer restauranteId,
+                                  Model model){
+
+        Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
+        model.addAttribute("restaurante", restaurante);
+        model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
+        return "cliente-restaurante";
     }
 
 }
