@@ -36,6 +36,9 @@ public class ClienteController {
     @Autowired
     private RestauranteRepository restauranteRepository;
 
+    @Autowired
+    private ItemCardapioRepository itemCardapioRepository;
+
     @GetMapping(path = "/home")
     public String home(Model model){
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
@@ -96,6 +99,23 @@ public class ClienteController {
         Restaurante restaurante = restauranteRepository.findById(restauranteId).orElseThrow();
         model.addAttribute("restaurante", restaurante);
         model.addAttribute("cep", SecurityUtils.loggedCliente().getCep());
+
+        List<String> categorias = itemCardapioRepository.findCategorias(restauranteId);
+        model.addAttribute("categorias", categorias);
+
+        List<ItemCardapio> itensCardapioDestaque;
+        List<ItemCardapio> itensCardapioNaoDestaque;
+
+        itensCardapioDestaque = itemCardapioRepository.findByRestaurante_IdAndDestaqueOrderByNome(restauranteId, true);
+        model.addAttribute("itensCardapioDestaque", itensCardapioDestaque);
+
+        itensCardapioNaoDestaque = itemCardapioRepository.findByRestaurante_IdAndDestaqueOrderByNome(restauranteId, false);
+        model.addAttribute("itensCardapioNaoDestaque", itensCardapioNaoDestaque);
+
+
+
+
+
         return "cliente-restaurante";
     }
 
