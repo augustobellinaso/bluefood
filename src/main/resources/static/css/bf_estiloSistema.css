@@ -3,6 +3,12 @@
     font-family: "Verdana";
 }
 
+input#inputLargo
+{
+    width: 300px;
+}
+
+
 body
 {
     text-align: center;
@@ -24,6 +30,7 @@ div#divLogotipoSistema
 {
     background-color: #1e9bde;
     height: 70px;
+    width: 100%;
 }
 
 span#spanAuxiliarDeAlinhamentoVertical
@@ -39,7 +46,8 @@ img#imgLogotipoSistema
     vertical-align: middle;
 }
 
-img#imgIconeUsuario
+img#imgIconeUsuario,
+img#imgIconeRestaurante
 {
     width: 100px;
 }
@@ -47,16 +55,19 @@ img#imgIconeUsuario
 h1
 {
     color: #1e9bde;
-    background-color: #eeeeee;
+    background-color: #ffffff;
     text-transform: uppercase;
+    font-style: italic;
+    font-size: 20px;
+    padding: 5px;
     width: 400px;
-    margin-left: auto;
-    margin-right: auto;
     border-left: 10px solid #1e9bde;
     border-right: 10px solid #1e9bde;
     border-top: 2px solid #1e9bde;
     border-bottom: 2px solid #1e9bde;
     border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 div#mensagemDeErro
@@ -74,6 +85,8 @@ div#divUsuarioLogado
 {
     background-color: #7bc2e5;
     color: #ffffff;
+    width: 100%;
+    height: auto;
     line-height: 40px;
 }
 
@@ -87,13 +100,19 @@ fieldset
     width: 400px;
     margin-left: auto;
     margin-right: auto;
-    border: none;
+    border-width: 0px;
+}
+
+fieldset#fieldsetFiltros
+{
+    border-width: 3px;
 }
 
 input, textarea, select
 {
     border: 2px solid #1e9bde;
-    height: 25px;
+    height: 35px;
+    vertical-align: middle;
     margin-bottom: 6px;
 }
 
@@ -140,9 +159,14 @@ table
 {
     margin-left: auto;
     margin-right: auto;
+}
+
+table
+{
     background-color: #ffffff;
     font-size: 14px;
     border-spacing: 1px;
+    border-collapse: separate;
 }
 
 
@@ -173,6 +197,8 @@ div#divCategoriasComidaOpcao
 {
     float: left;
     height: 130px;
+    background-color: #ffffff;
+    width: 20%;
 }
 
 div#divCategoriasComidaGeral
@@ -214,9 +240,16 @@ span#restauranteOpcaoTitulo
     text-transform: uppercase;
 }
 
+div#restaurantesGeral
+{
+
+}
+
 div#divRestauranteOpcao
 {
+    background-color: #ffffff;
     width: 400px;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
 }
