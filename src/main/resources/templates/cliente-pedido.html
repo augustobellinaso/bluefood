@@ -25,7 +25,7 @@
     <br/><br/>
 
     <div th:each="item : ${pedido.itens}">
-        <span th:text="${item.itemCardapio.nome}"></span><br/>
+        <span id="restauranteOpcaoTitulo" th:text="${item.itemCardapio.nome}"></span><br/>
         <span th:text="'Qtd: ' + ${item.quantidade}"></span><br/>
         <span th:text="${item.observacoes}"></span><br/>
         <span th:text="${#numbers.formatCurrency(item.preco)}"></span><br/><br/>
@@ -35,14 +35,14 @@
 
 
     <div>
-        <span>Taxa de entrega</span><br/>
-        <span th:text="${#numbers.formatCurrency(pedido.taxaEntrega)}"></span>
+        <span id="restauranteOpcaoTitulo">Taxa de entrega</span><br/>
+        <span id="restauranteOpcaoTaxa" th:text="${#numbers.formatCurrency(pedido.taxaEntrega)}"></span>
     </div>
     <br/><br/>
 
     <div>
-        <span>Total</span><br/>
-        <span th:text="${#numbers.formatCurrency(pedido.total)}"></span>
+        <span id="restauranteOpcaoTitulo">Total</span><br/>
+        <span id="restauranteOpcaoTaxa" th:text="${#numbers.formatCurrency(pedido.total)}"></span>
     </div>
     <br/><br/>
 

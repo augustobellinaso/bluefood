@@ -5,6 +5,8 @@ import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
+import augustobellinaso.bluefood.domain.pedido.Pedido;
+import augustobellinaso.bluefood.domain.pedido.PedidoRepository;
 import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,11 +41,18 @@ public class ClienteController {
     @Autowired
     private ItemCardapioRepository itemCardapioRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     @GetMapping(path = "/home")
     public String home(Model model){
         List<CategoriaRestaurante> categorias = categoriaRestauranteRepository.findAll(Sort.by("nome"));
         model.addAttribute("categorias", categorias);
         model.addAttribute("searchFilter", new SearchFilter());
+
+        List<Pedido> pedidos = pedidoRepository.listPedidosByCliente(SecurityUtils.loggedCliente().getId());
+        model.addAttribute("pedidos", pedidos);
+
         return "cliente-home";
     }
 
