@@ -1,7 +1,6 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
-import augustobellinaso.bluefood.domain.pedido.Carrinho;
-import augustobellinaso.bluefood.domain.pedido.RestauranteDiferenteException;
+import augustobellinaso.bluefood.domain.pedido.*;
 import augustobellinaso.bluefood.domain.restaurante.ItemCardapio;
 import augustobellinaso.bluefood.domain.restaurante.ItemCardapioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,9 @@ public class CarrinhoController {
 
     @Autowired
     private ItemCardapioRepository itemCardapioRepository;
+
+    @Autowired
+    private PedidoRepository pedidoRepository;
 
     @ModelAttribute("carrinho")
     public Carrinho carrinho() {
@@ -67,5 +69,21 @@ public class CarrinhoController {
 
     }
 
+    @GetMapping(path = "/refazerCarrinho")
+    public String refazerCarrinho(
+            @RequestParam("pedidoId") Integer pedidoId,
+            @ModelAttribute("carrinho") Carrinho carrinho,
+            Model model){
+
+        Pedido pedido = pedidoRepository.findById(pedidoId).orElseThrow();
+
+        carrinho.limpar();
+
+        for (ItemPedido itemPedido : pedido.getItens()) {
+            carrinho.adicionarItem(itemPedido);
+        }
+
+        return "cliente-carrinho";
+    }
 
 }
