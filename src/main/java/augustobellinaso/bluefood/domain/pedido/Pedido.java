@@ -57,10 +57,13 @@ public class Pedido implements Serializable {
     private BigDecimal subtotal;
 
     @NotNull
+    @Column(name = "taxa_entrega")
+    private BigDecimal taxaEntrega;
+
+    @NotNull
     private BigDecimal total;
 
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens;
-
 
 }
