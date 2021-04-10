@@ -4,26 +4,40 @@
       layout:decorate="~{layout}" th:with="link=@{/cliente/home}">
 
 <body>
-    <div layout:fragment="content">
+<div layout:fragment="content">
+    <div id="mensagemDeErro" th:if="${msg != null}">
+        <span th:text="${msg}"></span><br/>
+    </div>
 
-        <div>
-            <h1>SEU PEDIDO</h1>
-            <img th:if="${carrinho.restaurante != null}" th:src="@{/images/logotipo/} + ${carrinho.restaurante.logotipo}" id="imgRestauranteBusca"/>
-        </div>
-        <br/><br/>
+    <div>
+        <h1>SEU PEDIDO</h1>
+        <img th:if="${carrinho.restaurante != null}" th:src="@{/images/logotipo/} + ${carrinho.restaurante.logotipo}"
+             id="imgRestauranteBusca"/>
+    </div>
+    <br/><br/>
 
-        <div th:each="item : ${carrinho.itens}">
-            <span id="restauranteOpcaoTitulo" th:text="${item.itemCardapio.nome}"></span><br/>
-            <span id="restauranteOpcaoTaxa" th:text="'Qtd: ' + ${item.quantidade}"></span><br/>
-            <span id="restauranteOpcaoTaxa" th:text="${item.observacoes}"></span><br/>
-            <span id="restauranteOpcaoTaxa" th:text="${#numbers.formatCurrency(item.preco)}"></span><br/><br/>
-            <input type="button" value="Remover"/>
-        </div>
+    <div th:each="item : ${carrinho.itens}">
+        <span id="restauranteOpcaoTitulo" th:text="${item.itemCardapio.nome}"></span><br/>
+        <span id="restauranteOpcaoTaxa" th:text="'Qtd: ' + ${item.quantidade}"></span><br/>
+        <span id="restauranteOpcaoTaxa" th:text="${item.observacoes}"></span><br/>
+        <span id="restauranteOpcaoTaxa" th:text="${#numbers.formatCurrency(item.preco)}"></span><br/><br/>
+        <input type="button" value="Remover"
+               th:onclick="'location.href=\'' + @{/cliente/carrinho/remover} + '?itemId=' + ${item.itemCardapio.id} + '\';'"/>
         <br/><br/>
+    </div>
+    <br/><br/>
+
+    <div th:if="${carrinho.vazio()}">
+        <span>O carrinho está vazio</span>
+    </div>
+    <br/>
+
+    <div th:if="!${carrinho.vazio()}">
 
         <div>
             <span id="restauranteOpcaoTitulo">Taxa de entrega</span><br/>
-            <span id="restauranteOpcaoTaxa" th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
+            <span id="restauranteOpcaoTaxa"
+                  th:text="${#numbers.formatCurrency(carrinho.restaurante.taxaEntrega)}"></span>
         </div>
         <br/><br/>
 
@@ -37,11 +51,16 @@
             <span id="restauranteOpcaoTitulo">Cartão de Crédito</span><br/>
             <input type="text" id="inputLargo" onkeypress="return isNumberKey(event);"/>
         </div>
+        <br/>
 
         <div>
             <input type="button" value="Enviar pedido" onClick="location.href='clientePedido.html';"/><br/>
         </div>
+
     </div>
+
+
+</div>
 </body>
 
 </html>        
