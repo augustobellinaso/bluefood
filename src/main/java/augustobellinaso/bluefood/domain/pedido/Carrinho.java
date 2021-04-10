@@ -2,12 +2,16 @@ package augustobellinaso.bluefood.domain.pedido;
 
 import augustobellinaso.bluefood.domain.restaurante.ItemCardapio;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
+import lombok.Getter;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Carrinho {
+@Getter
+public class Carrinho implements Serializable {
 
     private List<ItemPedido> itens = new ArrayList<>();
     private Restaurante restaurante;
@@ -61,5 +65,19 @@ public class Carrinho {
         }
 
         return false;
+    }
+
+    public BigDecimal getPrecoTotal(boolean adicionarTaxaEntrega) {
+        BigDecimal soma = BigDecimal.ZERO;
+
+        for (ItemPedido item : itens) {
+            soma = soma.add(item.getPrecoCalculado());
+        }
+
+        if (adicionarTaxaEntrega) {
+            soma = soma.add(restaurante.getTaxaEntrega());
+        }
+
+        return soma;
     }
 }
