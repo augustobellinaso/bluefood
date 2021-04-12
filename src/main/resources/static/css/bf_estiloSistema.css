@@ -269,3 +269,10 @@ div#mensagemDeSucesso
 {
     border: 2px solid #ff2828;
 }
+
+div#divLarguraPadrao
+{
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
