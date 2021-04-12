@@ -21,9 +21,12 @@
 
     <div>
         <h1>Pedidos em Andamento</h1>
-        <input type="button" value="#35435" onClick="location.href='restaurantePedido.html';"/><br/>
-        <input type="button" value="#45648" onClick="location.href='restaurantePedido.html';"/><br/>
-        <input type="button" value="#79878" onClick="location.href='restaurantePedido.html';"/><br/>
+        <div th:each="pedido : ${pedidos}">
+            <input type="button" th:value="${pedido.formattedId}"
+                   th:onclick="'location.href=\'' + @{/restaurante/pedido} + '?pedidoId=' + ${pedido.id} + '\';'"/><br/>
+        </div>
+
+
     </div>
 
 </div>

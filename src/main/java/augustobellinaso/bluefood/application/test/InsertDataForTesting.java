@@ -2,6 +2,8 @@ package augustobellinaso.bluefood.application.test;
 
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
+import augustobellinaso.bluefood.domain.pedido.Pedido;
+import augustobellinaso.bluefood.domain.pedido.PedidoRepository;
 import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,11 +31,24 @@ public class InsertDataForTesting {
     @Autowired
     private ItemCardapioRepository itemCardapioRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     @EventListener
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        clientes();
+        Cliente[] clientes = clientes();
         Restaurante[] restaurantes = restaurantes();
         itensCardapio(restaurantes);
+
+        Pedido p = new Pedido();
+        p.setData(LocalDateTime.now());
+        p.setCliente(clientes[0]);
+        p.setRestaurante(restaurantes[0]);
+        p.setStatus(Pedido.Status.Producao);
+        p.setSubtotal(BigDecimal.valueOf(10));
+        p.setTaxaEntrega(BigDecimal.valueOf(2));
+        p.setTotal(BigDecimal.valueOf(12));
+        pedidoRepository.save(p);
     }
 
     private Restaurante[] restaurantes() {

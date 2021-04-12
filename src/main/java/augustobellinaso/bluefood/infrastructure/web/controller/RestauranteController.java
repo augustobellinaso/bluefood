@@ -2,6 +2,8 @@ package augustobellinaso.bluefood.infrastructure.web.controller;
 
 import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
+import augustobellinaso.bluefood.domain.pedido.Pedido;
+import augustobellinaso.bluefood.domain.pedido.PedidoRepository;
 import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +31,16 @@ public class RestauranteController {
     @Autowired
     private ItemCardapioRepository itemCardapioRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     @GetMapping(path = "/home")
-    public String home() {
+    public String home(Model model) {
+        Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+        List<Pedido> pedidos = pedidoRepository.findByRestaurante_IdOrderByDataDesc(restauranteId);
+
+        model.addAttribute("pedidos", pedidos);
+
         return "restaurante-home";
     }
 
