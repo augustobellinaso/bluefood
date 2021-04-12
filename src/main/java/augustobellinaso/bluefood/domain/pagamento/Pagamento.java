@@ -19,11 +19,11 @@ import java.time.LocalDateTime;
 public class Pagamento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne
     @NotNull
+    @MapsId
     private Pedido pedido;
 
     @NotNull
