@@ -2,10 +2,7 @@ package augustobellinaso.bluefood.application.service;
 
 import augustobellinaso.bluefood.domain.cliente.Cliente;
 import augustobellinaso.bluefood.domain.cliente.ClienteRepository;
-import augustobellinaso.bluefood.domain.restaurante.Restaurante;
-import augustobellinaso.bluefood.domain.restaurante.RestauranteComparator;
-import augustobellinaso.bluefood.domain.restaurante.RestauranteRepository;
-import augustobellinaso.bluefood.domain.restaurante.SearchFilter;
+import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +23,9 @@ public class RestauranteService {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    private ItemCardapioRepository itemCardapioRepository;
 
     @Transactional
     public void saveRestaurante(Restaurante restaurante) throws ValidationException {
@@ -100,6 +100,13 @@ public class RestauranteService {
         restaurantes.sort(comparator);
 
         return restaurantes;
+    }
+
+    @Transactional
+    public void saveItemCardapio(ItemCardapio itemCardapio){
+        itemCardapio = itemCardapioRepository.save(itemCardapio);
+        itemCardapio.setImagemFileName();
+        imageService.uploadComida(itemCardapio.getImagemFile(), itemCardapio.getImagem());
     }
 
 }
