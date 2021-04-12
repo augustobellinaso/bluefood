@@ -20,7 +20,7 @@ public class RelatorioService {
         Integer pedidoId = filter.getPedidoId();
 
         if (pedidoId != null) {
-            Pedido pedido = pedidoRepository.finbByIdAndRestaurante_Id(pedidoId, restauranteId);
+            Pedido pedido = pedidoRepository.findByIdAndRestaurante_Id(pedidoId, restauranteId);
             return List.of(pedido);
         }
 

@@ -151,8 +151,8 @@ public class RestauranteController {
     @GetMapping(path = "/relatorio/pedidos")
     public String relatorioPedidos(@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
                                    Model model) {
-        Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
 
+        Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
         List<Pedido> pedidos = relatorioService.listPedidos(restauranteId, filter);
         model.addAttribute("pedidos", pedidos);
 
