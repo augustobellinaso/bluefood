@@ -1,9 +1,11 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
+import augustobellinaso.bluefood.application.service.RelatorioService;
 import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.pedido.Pedido;
 import augustobellinaso.bluefood.domain.pedido.PedidoRepository;
+import augustobellinaso.bluefood.domain.pedido.RelatorioPedidoFilter;
 import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class RestauranteController {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private RelatorioService relatorioService;
 
     @GetMapping(path = "/home")
     public String home(Model model) {
@@ -144,7 +149,15 @@ public class RestauranteController {
     }
 
     @GetMapping(path = "/relatorio/pedidos")
-    public String relatorioPedidos() {
+    public String relatorioPedidos(@ModelAttribute("relatorioPedidoFilter") RelatorioPedidoFilter filter,
+                                   Model model) {
+        Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+
+        List<Pedido> pedidos = relatorioService.listPedidos(restauranteId, filter);
+        model.addAttribute("pedidos", pedidos);
+
+        model.addAttribute("filter", filter);
+
 
         return "restaurante-relatorio-pedidos";
     }
