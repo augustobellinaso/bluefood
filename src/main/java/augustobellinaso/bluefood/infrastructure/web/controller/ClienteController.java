@@ -73,7 +73,7 @@ public class ClienteController {
 
             try {
                 clienteService.saveCliente(cliente);
-                model.addAttribute("msg", "Cliente cadastrado com sucesso!");
+                model.addAttribute("msg", "Cliente gravado com sucesso!");
             } catch (ValidationException e) {
                 errors.rejectValue("email", null, e.getMessage());
             }

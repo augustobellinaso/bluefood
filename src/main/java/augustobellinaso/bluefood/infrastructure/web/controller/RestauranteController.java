@@ -55,7 +55,7 @@ public class RestauranteController {
 
             try {
                 restauranteService.saveRestaurante(restaurante);
-                model.addAttribute("msg", "Restaurante cadastrado com sucesso!");
+                model.addAttribute("msg", "Restaurante gravado com sucesso!");
             } catch (ValidationException e) {
                 errors.rejectValue("email", null, e.getMessage());
             }
