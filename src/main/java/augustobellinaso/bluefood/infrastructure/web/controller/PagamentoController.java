@@ -1,5 +1,6 @@
 package augustobellinaso.bluefood.infrastructure.web.controller;
 
+import augustobellinaso.bluefood.application.service.PagamentoException;
 import augustobellinaso.bluefood.application.service.PedidoService;
 import augustobellinaso.bluefood.domain.pedido.Carrinho;
 import augustobellinaso.bluefood.domain.pedido.Pedido;
@@ -23,11 +24,16 @@ public class PagamentoController {
                         SessionStatus sessionStatus,
                         Model model) {
 
+        try {
+            Pedido pedido = pedidoService.criarEPagar(carrinho, numCartao);
+            sessionStatus.setComplete();
+            return "redirect:/cliente/pedido/view?pedidoId=" + pedido.getId();
 
-        Pedido pedido = pedidoService.criarEPagar(carrinho, numCartao);
-        sessionStatus.setComplete();
+        } catch (PagamentoException e) {
+            model.addAttribute("msg", e.getMessage());
+            return "cliente-carrinho";
+        }
 
-        return "redirect:/cliente/pedido/view?pedidoId=" + pedido.getId();
 
     }
 }
