@@ -142,4 +142,10 @@ public class RestauranteController {
 
         return "restaurante-pedido";
     }
+
+    @GetMapping(path = "/relatorio/pedidos")
+    public String relatorioPedidos() {
+
+        return "restaurante-relatorio-pedidos";
+    }
 }
