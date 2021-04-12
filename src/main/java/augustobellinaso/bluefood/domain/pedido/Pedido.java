@@ -1,6 +1,7 @@
 package augustobellinaso.bluefood.domain.pedido;
 
 import augustobellinaso.bluefood.domain.cliente.Cliente;
+import augustobellinaso.bluefood.domain.pagamento.Pagamento;
 import augustobellinaso.bluefood.domain.restaurante.Restaurante;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -77,6 +78,9 @@ public class Pedido implements Serializable {
 
     @OneToMany(mappedBy = "id.pedido", fetch = FetchType.EAGER)
     private Set<ItemPedido> itens;
+
+    @OneToOne(mappedBy = "pedido")
+    private Pagamento pagamento;
 
     public String getFormattedId() {
         return String.format("#%04d", id);

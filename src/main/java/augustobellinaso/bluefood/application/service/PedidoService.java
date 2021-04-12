@@ -1,6 +1,8 @@
 package augustobellinaso.bluefood.application.service;
 
 import augustobellinaso.bluefood.domain.pagamento.DadosCartao;
+import augustobellinaso.bluefood.domain.pagamento.Pagamento;
+import augustobellinaso.bluefood.domain.pagamento.PagamentoRepository;
 import augustobellinaso.bluefood.domain.pagamento.StatusPagamento;
 import augustobellinaso.bluefood.domain.pedido.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
@@ -24,6 +26,9 @@ public class PedidoService {
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
 
     @Value("${bluefood.sbpay.url}")
     private String sbPayUrl;
@@ -76,6 +81,12 @@ public class PedidoService {
         if (statusPagamento != StatusPagamento.Autorizado) {
             throw new PagamentoException(statusPagamento.getDescricao());
         }
+
+        Pagamento pagamento = new Pagamento();
+        pagamento.setData(LocalDateTime.now());
+        pagamento.setPedido(pedido);
+        pagamento.definirNumeroEBandeira(numCartao);
+        pagamentoRepository.save(pagamento);
 
 
         return pedido;
