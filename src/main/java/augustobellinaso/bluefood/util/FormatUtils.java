@@ -9,7 +9,7 @@ public class FormatUtils {
     private static final Locale LOCALE_BRAZIL = new Locale("pt", "BR");
 
     public static NumberFormat newCurrencyFormat() {
-        NumberFormat nf = NumberFormat.getCurrencyInstance(LOCALE_BRAZIL);
+        NumberFormat nf = NumberFormat.getNumberInstance(LOCALE_BRAZIL);
 
         nf.setMaximumFractionDigits(2);
         nf.setMinimumFractionDigits(2);
