@@ -5,6 +5,7 @@ import augustobellinaso.bluefood.application.service.RestauranteService;
 import augustobellinaso.bluefood.application.service.ValidationException;
 import augustobellinaso.bluefood.domain.pedido.Pedido;
 import augustobellinaso.bluefood.domain.pedido.PedidoRepository;
+import augustobellinaso.bluefood.domain.pedido.RelatorioItemFilter;
 import augustobellinaso.bluefood.domain.pedido.RelatorioPedidoFilter;
 import augustobellinaso.bluefood.domain.restaurante.*;
 import augustobellinaso.bluefood.util.SecurityUtils;
@@ -160,5 +161,15 @@ public class RestauranteController {
 
 
         return "restaurante-relatorio-pedidos";
+    }
+
+    @GetMapping(path = "/relatorio/itens")
+    public String relatorioItens(@ModelAttribute("relatorioItemFilter") RelatorioItemFilter filter,
+            Model model) {
+
+        model.addAttribute("relatorioItemFilter", filter);
+
+
+        return "restaurante-relatorio-itens";
     }
 }

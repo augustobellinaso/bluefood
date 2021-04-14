@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}" th:with="link=@{/restaurante/home}">
+
+<body>
+<div layout:fragment="content">
+
+    <div>
+        <h1>Relatório de Itens: </h1>
+        <form method="get" th:action="@{/restaurante/relatorio/itens}" th:object="${relatorioItemFilter}">
+            <fieldset id="fieldsetFiltros">
+                <legend>Filtros</legend>
+                <label for="numero">Item: </label><br/>
+                <input type="text" name="numero" id="numero" th:field="*{itemId}"/><br/>
+                <label for="inicio">Início: </label><br/>
+                <input type="date" name="inicio" id="inicio" th:field="*{dataInicial}"/><br/>
+                <label for="fim">Fim: </label><br/>
+                <input type="date" id="fim" name="fim" th:field="*{dataFinal}" /><br/>
+                <input type="submit" value="Buscar"/>
+            </fieldset>
+        </form>
+    </div>
+    <br/><br/>
+
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Quantidade</th>
+            <th>Faturamento</th>
+        </tr>
+        <tr>
+            <td>Hamburguer</td>
+            <td>25</td>
+            <td>R$ 355,00</td>
+        </tr>
+
+    </table>
+    <br/><br/>
+
+    <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\';'"/>
+
+</div>
+</body>
+
+</html>
