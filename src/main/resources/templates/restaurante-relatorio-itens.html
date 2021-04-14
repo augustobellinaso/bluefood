@@ -30,19 +30,22 @@
     </div>
     <br/><br/>
 
-    <table>
+
+    <table th:if="${itensCalculados.size() > 0}">
         <tr>
             <th>Item</th>
             <th>Quantidade</th>
             <th>Faturamento</th>
         </tr>
-        <tr>
-            <td>Hamburguer</td>
-            <td>25</td>
-            <td>R$ 355,00</td>
+        <tr th:each="item : ${itensCalculados}">
+            <td><span th:text="${item.nome}"></span></td>
+            <td><span th:text="${item.quantidade}"></span></td>
+            <td><span th:text="${#numers.formatCurrency(item.valor)}"></span></td>
         </tr>
 
     </table>
+
+    <span th:if="${itensCalculados.size() == 0}">Nenhum item encontrado</span>
     <br/><br/>
 
     <input type="button" value="Voltar" th:onclick="'location.href=\'' + @{/restaurante/home} + '\';'"/>
