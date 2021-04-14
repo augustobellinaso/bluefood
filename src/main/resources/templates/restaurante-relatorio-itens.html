@@ -40,7 +40,7 @@
         <tr th:each="item : ${itensCalculados}">
             <td><span th:text="${item.nome}"></span></td>
             <td><span th:text="${item.quantidade}"></span></td>
-            <td><span th:text="${#numers.formatCurrency(item.valor)}"></span></td>
+            <td><span th:text="${#numbers.formatCurrency(item.valor)}"></span></td>
         </tr>
 
     </table>
