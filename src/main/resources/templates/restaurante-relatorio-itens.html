@@ -11,12 +11,19 @@
         <form method="get" th:action="@{/restaurante/relatorio/itens}" th:object="${relatorioItemFilter}">
             <fieldset id="fieldsetFiltros">
                 <legend>Filtros</legend>
+
                 <label for="numero">Item: </label><br/>
-                <input type="text" name="numero" id="numero" th:field="*{itemId}"/><br/>
+                <select id="numero" th:field="*{itemId}">
+                    <option value="0">Todos</option>
+                    <option th:each="item : ${itensCardapio}" th:value="${item.id}" th:text="${item.nome}"/>
+                </select> <br/>
+
                 <label for="inicio">Início: </label><br/>
-                <input type="date" name="inicio" id="inicio" th:field="*{dataInicial}"/><br/>
+                <input type="date"id="inicio" th:field="*{dataInicial}"/><br/>
+
                 <label for="fim">Fim: </label><br/>
-                <input type="date" id="fim" name="fim" th:field="*{dataFinal}" /><br/>
+                <input type="date" id="fim"th:field="*{dataFinal}" /><br/>
+
                 <input type="submit" value="Buscar"/>
             </fieldset>
         </form>

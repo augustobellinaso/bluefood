@@ -167,6 +167,10 @@ public class RestauranteController {
     public String relatorioItens(@ModelAttribute("relatorioItemFilter") RelatorioItemFilter filter,
             Model model) {
 
+        Integer restauranteId = SecurityUtils.loggedRestaurante().getId();
+        List<ItemCardapio> itensCardapio = itemCardapioRepository.findByRestaurante_IdOrderByNome(restauranteId);
+        model.addAttribute("itensCardapio", itensCardapio);
+
         model.addAttribute("relatorioItemFilter", filter);
 
 
