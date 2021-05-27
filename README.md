@@ -78,7 +78,7 @@ trocando as informações acima pelas definidas em seu ambiente.
   bluefood.files.comida=COLOQUE-AQUI-O-CAMINHO-DA-PASTA/bluefood/src/main/resources/static/bluefoodfiles/comidas
   bluefood.files.categoria=COLOQUE-AQUI-O-CAMINHO-DA-PASTA/bluefood/src/main/resources/static/bluefoodfiles/categorias
   ```
-  é necessário informar o caminho do local onde a pasta do projeto foi colocado, trocando aquele trecho `COLOQUE-AQUI-O-CAMINHO-DA-PASTA` pelo caminho.
+  é necessário informar o caminho do local onde a pasta do projeto foi colocado, trocando o trecho `COLOQUE-AQUI-O-CAMINHO-DA-PASTA` pelo caminho.
   
 ### Executando
 
@@ -124,7 +124,9 @@ Após as alterações acima terem sido feitas, é possível executar o aplicativ
   - Spring Security
   - Spring Validation
 - [PostgreSQL](https://www.postgresql.org/)
+  - para ambiente de produção
 - [MySQL](https://www.mysql.com/)
+  - para ambiente de desenvolvimento 
 - [H2 Database](https://www.h2database.com/html/main.html)
   - para execução dos testes.
   
